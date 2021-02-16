@@ -8,7 +8,7 @@ html{
 
 .prof-box{
     width: 450px;
-    height: 450px;
+    height: 500px;
     background-color: rgba(0,0,0,0.5);
     padding: 40 px;
     color:rgb(255, 255, 255);
@@ -19,7 +19,7 @@ html{
 
 .prof-pic{
     border-radius: 50%;
-    height: 400px;
+    height: 200px;
     width: 200px;
     border-style: solid;
     border-color: white;
