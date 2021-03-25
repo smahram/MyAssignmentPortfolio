@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+    Author(s):  Christian Escobarete & Sarah & Nick & Yasir
+    Class: Software Engineering
+    Description: Health risk calculator
+-->
+    <head>
+        <meta charset="UTF-8">
+        <title>Health Insurance Risk Calculater</title>
+        <!--CSS code-->
+        <style>  
+            body{
+                background-color: rgb(138, 160, 194) ;
+            }
+            h1{
+                text-align: center;
+            }
+            h2{
+                text-align: center;
+            }
+            body{
+                text-align: center;
+            }
+        </style>
+        <!--JS code-->
+        <script>
+            // global count
+            var count = 0;
+            // Disease category
+            function disease() {
+                var disease = document.getElementById("dis").value;
+
+                if (!(disease)) {
+                    alert("NOT ACCURATE: Give correct disease")
+                } else if (disease == "diabetes" || disease == "Diabetes") {
+                    count = count + 10;
+                } else if (disease == "cancer" || disease == "Cancer") {
+                    count = count + 10;
+                } else if (disease == "Alzheimers" || disease == "alzheimers") {
+                    count = count + 10;
+                } else if (disease == 'None') {
+                    count = count + 0;
+                }
+            }
+            // Blood pressure category
+            function bloodPressure() {
+                var systolic = document.getElementById("bpr").value;
+                var diastolic = document.getElementById("bpr2").value;
+                if (!(systolic && diastolic)) {
+                    alert("NOT ACCURATE: Need Blood Pressure")
+                    // Normal blood pressure    
+                } else if (systolic < 120 && diastolic < 80) {
+                    count = count + 0;
+                }   else if (systolic >= 120 && systolic <= 129 && diastolic < 80) {
+                    count = count + 15;
+                }   else if (systolic >= 130 && systolic <= 139 && diastolic < 90) { //here
+                    count = count + 30;
+                }   else if(diastolic >= 80 && diastolic <= 89 && systolic < 140){
+                    count = count + 30;
+                }   else if (systolic >= 140 && systolic <= 180) {
+                    count = count + 75;
+                }   else if (diastolic >= 90 && diastolic <= 120){
+                    count = count + 75;
+                }   else if (systolic > 180) {
+                    count = count + 100;
+                }   else if (diastolic > 120 ){
+                    count = count + 100;
+                }
+            }
+            // Body mass index category
+            function bodyMassIndex() {
+                var clientLbs = document.getElementById("bmi").value;
+                var clientHeightfeet = document.getElementById("bmi1").value;
+                var clientHeightinches = document.getElementById("bmi2").value;
+                var clientHeightinches = parseInt(clientHeightfeet * 12) + parseInt(clientHeightinches);
+                //Aalgorithm for bmi
+                BMI = (clientLbs / (clientHeightinches*clientHeightinches)) * 703
+
+                if (!(BMI)) {
+                    alert("NOT ACCURATE: Need BMI")
+                } else if (BMI >= 18.5 && BMI <= 24.9) {
+                    confirm("BMI = Normal")
+                    count = count + 0;
+                } else if (BMI >= 25.0 && BMI <= 29.9) {
+                    confirm("BMI = Over Weight ")
+                    count = count + 30;
+                } else if(BMI >= 30.0 && BMI <= 34.9){
+                    confirm("BMI = Obesity ")
+                    count = count + 75;
+                }
+            }
+            // Age category
+            function ageClient() {
+                var clientAge = document.getElementById("dob").value;
+                if (!(clientAge)) {
+                    alert("NOT ACCURATE: Need Age")
+                } else if (clientAge < 30) {
+                    count = count + 0;
+                } else if (clientAge < 45) {
+                    count = count + 10;
+                } else if (clientAge < 60) {
+                    count = count + 20;
+                } else if (clientAge >= 60) {
+                    count = count + 30;
+                }
+            }
+            //count for risk 
+            var score1, score2, score3, score4;
+            function totalScore() {
+                if (count <= 20) {
+                    score1 = confirm("Low Risk");
+                    if(score1 == true){
+                        confirm(count)
+                    }
+                    count = 0;
+                } else if (count <= 50) {
+                    score2 = confirm("Moderate Risk");
+                    if(score2 == true){
+                        confirm(count)
+                    }
+                    count = 0;
+                } else if (count <= 75) {
+                    score3 = confirm("High Risk");
+                    if(score3 == true){
+                        confirm(count)
+                    }
+                    count = 0;
+                } else if (count > 75) {
+                    score4 = confirm("Uninsurable");
+                    if(score4 == true){
+                        confirm(count)
+                    }
+                    count = 0;
+                }
+            }
+        </script> 
+    </head>
+    <body>
+        <h1>Health Risk</h1>
+        <h2>Clients Risk Simulator</h2>
+        <b>Clients disease: <input type='text' id="dis" value="" size="5"></b><br><br>
+        <b>Clients systolic blood pressure: <input type='text' id="bpr" value="" size="5"></b><br><br>
+        <b>Clients diastolic blood pressure: <input type='text' id="bpr2" value="" size="5"></b><br><br>
+        <b>Body mass index(pound): <input type='text' id="bmi" value="" size="5"></b><br><br>
+        <b>Height for BMI(feet): <input type='text' id="bmi1" value="" size="5">
+        <b> inches: <input type='text' id="bmi2" value="" size="5"></b></b><br><br>
+        <b>Clients age: <input type='text' id="dob" value="" size="5"></b><br><br>
+        <!--link the functions into one button and 
+            have everything caluculate-->
+        <button type="button" onclick="disease(), ageClient(), bloodPressure(), bodyMassIndex(), totalScore()">Calculate Risk</button><br><br>
+        <a href="javascript:window.opener='https://riskcalc-cae2.azurewebsites.net/';window.close();">Close When Done</a>
+        <h3>Help</h3>
+        <p><b>Blood Pressure:</b><br>
+        Normal BP is less than 120(systolic) and less then 80(diastolic)<br>
+        Elevated BP is 120-129(systolic) and les than 80(diastolic)<br>
+        High BP - Hypertension Stage 1 is 130-139(systolic) or 80-89(diastolic)<br>
+        High BP - Hypertension Stage 2 is 140 or higher(systolic) or 90 or higher(diastolic)<br>
+        Hypertensive Crisis is higher then 180(systolic) and/or higher then 120(diastolic)<br>
+        <b>Body Mass Index:</b><br>
+        Input body weight in pounds and hieght in feet<br>
+        <b>Age:</b><br>
+        Input any age, the higher it is the higher the risk<br>
+        <b>Disease:</b><br>
+        Input these diseases ONLY: Cancer, Diabetes, and Alzeimers - Can also be in lower case</p>
+    </body>
+</html>

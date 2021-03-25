@@ -1,0 +1,5 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/9a957856-6565-4555-86ea-832b0bcd100e/resourceGroups/sprint4-lab-rg/providers/Microsoft.Web/sites/riskcalc-cae2",
+    "appService.deploySubpath": ".",
+    "appService.showBuildDuringDeployPrompt": false
+}
